@@ -1,0 +1,130 @@
+{"products" :[
+  {
+    "id": 1,
+    "name": "wooden chair",
+    "price": 65,
+    "img": "assets/images/arrivals1.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 2,
+    "name": "single armchair",
+    "price": 80,
+    "img": "assets/images/arrivals2.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 3,
+    "name": "wooden chair",
+    "price": 40,
+    "img": "assets/images/arrivals3.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 4,
+    "name": "wooden armchair",
+    "price": 65,
+    "img": "assets/images/arrivals4.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 5,
+    "name": "stylish chair",
+    "price": 100,
+    "img": "assets/images/arrivals5.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 6,
+    "name": "mapple wood dinning table",
+    "price": 140,
+    "img": "assets/images/arrivals6.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 7,
+    "name": "arm chair",
+    "price": 90,
+    "img": "assets/images/arrivals7.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 8,
+    "name": "wooden bed",
+    "price": 140,
+    "img": "assets/images/arrivals8.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 9,
+    "name": "wooden chair",
+    "price": 65,
+    "img": "assets/images/arrivals1.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 10,
+    "name": "single armchair",
+    "price": 80,
+    "img": "assets/images/arrivals2.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 11,
+    "name": "wooden chair",
+    "price": 40,
+    "img": "assets/images/arrivals3.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 12,
+    "name": "wooden armchair",
+    "price": 65,
+    "img": "assets/images/arrivals4.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 13,
+    "name": "stylish chair",
+    "price": 100,
+    "img": "assets/images/arrivals5.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 14,
+    "name": "mapple wood dinning table",
+    "price": 140,
+    "img": "assets/images/arrivals6.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 15,
+    "name": "arm chair",
+    "price": 90,
+    "img": "assets/images/arrivals7.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  },
+  {
+    "id": 16,
+    "name": "wooden bed",
+    "price": 140,
+    "img": "assets/images/arrivals8.png",
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    "qty": 0
+  }
+]}
