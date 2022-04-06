@@ -13,14 +13,17 @@ import Product from "./components/products/Product";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Signup from "./components/signup/Signup";
 import Error from "./components/errorPage/Error";
+import Checkout from "./components/checkout/Checkout";
+import Address from "./components/address/Address";
 
 function App() {
   return (
     <>
       <Router>
         <Header />
-        {/* <Collections /> */}
         {/* <Signup /> */}
+        {/* <Address/> */}
+
         <Routes>
           <Route path="/product/:id" element={<Product />} />
           <Route
@@ -38,7 +41,10 @@ function App() {
               </>
             }
           />
-            <Route path="*" element={<Error />}></Route>
+          <Route path="*" element={<Error />}></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/address" element={ <Address/>}></Route>
+
         </Routes>
         <Footers />
       </Router>

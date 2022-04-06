@@ -194,7 +194,7 @@ export default function Header() {
                         })}
                         <li className="total">
                           <span>Total: $ {price}</span>
-                          <button className="btn-cart pull-right">
+                          <button className="btn-cart pull-right" onClick={()=>navigate("/checkout")}>
                             Checkout
                           </button>
                         </li>
