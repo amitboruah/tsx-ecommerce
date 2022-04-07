@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function Newsletter() {
   return (
@@ -15,16 +14,16 @@ export default function Newsletter() {
                   <div className="hm-foot-menu">
                     <ul>
                       <li>
-                        <a href="#">about us</a>
+                        <p >about us</p>
                       </li>
                       <li>
-                        <a href="#">contact us</a>
+                        <p >contact us</p>
                       </li>
                       <li>
-                        <a href="#">news</a>
+                        <p >news</p>
                       </li>
                       <li>
-                        <a href="#">store</a>
+                        <p >store</p>
                       </li>
                     </ul>
                   </div>
@@ -38,19 +37,19 @@ export default function Newsletter() {
                   <div className="hm-foot-menu">
                     <ul>
                       <li>
-                        <a href="#">wooden chair</a>
+                        <p >wooden chair</p>
                       </li>
                       <li>
-                        <a href="#">royal cloth sofa</a>
+                        <p >royal cloth sofa</p>
                       </li>
                       <li>
-                        <a href="#">accent chair</a>
+                        <p >accent chair</p>
                       </li>
                       <li>
-                        <a href="#">bed</a>
+                        <p >bed</p>
                       </li>
                       <li>
-                        <a href="#">hanging lamp</a>
+                        <p >hanging lamp</p>
                       </li>
                     </ul>
                   </div>
@@ -64,19 +63,19 @@ export default function Newsletter() {
                   <div className="hm-foot-menu">
                     <ul>
                       <li>
-                        <a href="#">my account</a>
+                        <p >my account</p>
                       </li>
                       <li>
-                        <a href="#">wishlist</a>
+                        <p >wishlist</p>
                       </li>
                       <li>
-                        <a href="#">Community</a>
+                        <p >Community</p>
                       </li>
                       <li>
-                        <a href="#">order history</a>
+                        <p >order history</p>
                       </li>
                       <li>
-                        <a href="#">my cart</a>
+                        <p >my cart</p>
                       </li>
                     </ul>
                   </div>

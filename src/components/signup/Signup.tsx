@@ -1,5 +1,4 @@
-import React from "react";
-import { Form, Button, DatePicker, Input, Select } from "antd";
+import { Form, Button, Input} from "antd";
 import "./signup.scss";
 // import {useNavigate} from 'react-router-dom'
 
@@ -67,7 +66,7 @@ export default function Signup() {
             <Input.Password placeholder="Type your Password" />
           </Form.Item>
 
-          <Form.Item
+          {/* <Form.Item
             name="gender"
             label="Gender"
             rules={[
@@ -81,7 +80,7 @@ export default function Signup() {
               <Select.Option value="male">Male</Select.Option>
               <Select.Option value="female">Female</Select.Option>
             </Select>
-          </Form.Item>
+          </Form.Item> */}
 
           {/* <Form.Item
             name="dob"

@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Blogs() {
   return (
     <>
@@ -13,15 +11,15 @@ export default function Blogs() {
               <div className="col-sm-4">
                 <div className="single-blog">
                   <div className="single-blog-img">
-                    <img src="assets/images/b1.jpg" alt="blog image" />
+                    <img src="assets/images/b1.jpg" alt="blog" />
                     <div className="single-blog-img-overlay"></div>
                   </div>
                   <div className="single-blog-txt">
                     <h2>
-                      <a href="#">Why Brands are Looking at Local Language</a>
+                      <p>Why Brands are Looking at Local Language</p>
                     </h2>
                     <h3>
-                      By <a href="#">Robert Norby</a> / 18th March 2018
+                      By <p>Robert Norby</p>March 2018
                     </h3>
                     <p>
                       Nemo enim ipsam voluptatem quia voluptas sit aspernatur
@@ -34,15 +32,15 @@ export default function Blogs() {
               <div className="col-sm-4">
                 <div className="single-blog">
                   <div className="single-blog-img">
-                    <img src="assets/images/b2.jpg" alt="blog image" />
+                    <img src="assets/images/b2.jpg" alt="blog" />
                     <div className="single-blog-img-overlay"></div>
                   </div>
                   <div className="single-blog-txt">
                     <h2>
-                      <a href="#">Why Brands are Looking at Local Language</a>
+                      <p>Why Brands are Looking at Local Language</p>{" "}
                     </h2>
                     <h3>
-                      By <a href="#">Robert Norby</a> / 18th March 2018
+                      By <p>Robert Norby</p>March 2018
                     </h3>
                     <p>
                       Nemo enim ipsam voluptatem quia voluptas sit aspernatur
@@ -55,15 +53,15 @@ export default function Blogs() {
               <div className="col-sm-4">
                 <div className="single-blog">
                   <div className="single-blog-img">
-                    <img src="assets/images/b3.jpg" alt="blog image" />
+                    <img src="assets/images/b3.jpg" alt="blog" />
                     <div className="single-blog-img-overlay"></div>
                   </div>
                   <div className="single-blog-txt">
                     <h2>
-                      <a href="#">Why Brands are Looking at Local Language</a>
+                      <p>Why Brands are Looking at Local Language</p>{" "}
                     </h2>
                     <h3>
-                      By <a href="#">Robert Norby</a> / 18th March 2018
+                      By <p>Robert Norby</p>March 2018
                     </h3>
                     <p>
                       Nemo enim ipsam voluptatem quia voluptas sit aspernatur

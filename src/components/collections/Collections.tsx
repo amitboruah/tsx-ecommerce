@@ -56,10 +56,6 @@ export default function Collections() {
     setPostPerPage(pageSize);
   };
   
-  const akshay = (current: any, size: any) => {
-    console.log(current, "akshay current");
-    console.log(size, "akshay size");
-  };
   
   //pagination
   
@@ -79,10 +75,10 @@ export default function Collections() {
           </div>
           <div className="sort">
             <h3>Sort By:</h3>
-            <a>
+            <a href="">
               High to low ↑ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </a>
-            <a>Low to high ↓ </a>
+            </a >
+            <a href="">Low to high ↓ </a>
           </div>
           <div className="new-arrivals-content">
             <div className="row">
@@ -101,7 +97,7 @@ export default function Collections() {
                             <span className="lnr lnr-cart"></span>
                             {
                               isAuthenticated && (
-                                <a onClick={() => handleAddToCart(data.id)}>
+                                <a href="" onClick={() => handleAddToCart(data.id)}>
                               add <span>to </span> cart
                             </a>
                               )
@@ -118,7 +114,7 @@ export default function Collections() {
                         </div>
                       </div>
                       <h4>
-                        <a onClick={() => navigate(`/product/${data.id}`)}>
+                        <a href="#dumy" onClick={() => navigate(`/product/${data.id}`)}>
                           {data.name}
                         </a>
                       </h4>
@@ -139,7 +135,6 @@ export default function Collections() {
               pageSizeOptions={[4, 7, 10]}
               showSizeChanger
               onChange={handleOnChange}
-              onShowSizeChange={akshay}
             />
           }
         </div>

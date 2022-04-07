@@ -46,8 +46,10 @@ export default function Product() {
     product
       .map((data: any) => data.qty * data.price)
       .map((e: any) => {
-        sum = sum + e;
-        setPrice(sum);
+       return(
+        sum = sum + e,
+        setPrice(sum)
+       )
       });
   };
 

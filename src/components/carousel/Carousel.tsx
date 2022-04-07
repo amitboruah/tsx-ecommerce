@@ -1,13 +1,6 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import "./carousel.scss"
 
 export default function Carousel() {
-  const { isAuthenticated }: any = useAuth0();
-
-  const handleAddToCart = () => {
-   isAuthenticated?console.log("item added"):console.log("loggin first");  
-  };
-
 
   return (
     <>
@@ -54,17 +47,10 @@ export default function Carousel() {
                               <del>$ 499.00</del>
                             </p>
                           </div>
-                          {/* <button
-                            className="btn-cart welcome-add-cart"
-                            onClick={()=>handleAddToCart()}
-                          >
-                            <span className="lnr lnr-plus-circle"></span>
-                            add <span>to</span> cart
-                          </button> */}
+                         
 
                           <button
                             className="btn-cart welcome-add-cart welcome-more-info"
-                            // onclick="window.location.href='#'"
                           >
                             more info
                           </button>
@@ -76,7 +62,7 @@ export default function Carousel() {
                         <div className="welcome-hero-img">
                           <img
                             src="assets/images/slider1.png"
-                            alt="slider image"
+                            alt="slider"
                           />
                         </div>
                       </div>
@@ -109,16 +95,9 @@ export default function Carousel() {
                               <del>$ 299.00</del>
                             </p>
                           </div>
-                          {/* <button
-                            className="btn-cart welcome-add-cart"
-                            onClick={()=>{handleAddToCart()}}
-                          >
-                            <span className="lnr lnr-plus-circle"></span>
-                            add <span>to</span> cart
-                          </button> */}
+                         
                           <button
                             className="btn-cart welcome-add-cart welcome-more-info"
-                            // onclick="window.location.href='#'"
                           >
                             more info
                           </button>
@@ -130,7 +109,7 @@ export default function Carousel() {
                         <div className="welcome-hero-img">
                           <img
                             src="assets/images/slider2.png"
-                            alt="slider image"
+                            alt="slider"
                           />
                         </div>
                       </div>
@@ -163,16 +142,9 @@ export default function Carousel() {
                               <del>$ 399.00</del>
                             </p>
                           </div>
-                          {/* <button
-                            className="btn-cart welcome-add-cart"
-                            onClick={() => handleAddToCart}
-                          >
-                            <span className="lnr lnr-plus-circle"></span>
-                            add <span>to</span> cart
-                          </button> */}
+                     
                           <button
                             className="btn-cart welcome-add-cart welcome-more-info"
-                            // onclick="window.location.href='#'"
                           >
                             more info
                           </button>
@@ -184,7 +156,7 @@ export default function Carousel() {
                         <div className="welcome-hero-img">
                           <img
                             src="assets/images/slider3.png"
-                            alt="slider image"
+                            alt="slider"
                           />
                         </div>
                       </div>

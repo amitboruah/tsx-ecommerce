@@ -10,11 +10,11 @@ import Footers from "./components/footer/Footers";
 import Header from "./components/header/Header";
 import Newsletter from "./components/newsletter/Newsletter";
 import Product from "./components/products/Product";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Signup from "./components/signup/Signup";
+// import Signup from "./components/signup/Signup";
 import Error from "./components/errorPage/Error";
 import Checkout from "./components/checkout/Checkout";
 import Address from "./components/address/Address";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -22,7 +22,6 @@ function App() {
       <Router>
         <Header />
         {/* <Signup /> */}
-        {/* <Address/> */}
 
         <Routes>
           <Route path="/product/:id" element={<Product />} />

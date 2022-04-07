@@ -19,7 +19,7 @@ export default function Checkout() {
       title: "Image",
       dataIndex: "img",
       key: "img",
-      render: (image: string) => <img src={image} />,
+      render: (image: string) => <img src={image} alt="product" />,
     },
     {
       title: "Quantity",
@@ -54,12 +54,8 @@ export default function Checkout() {
           summary={(index: any) => (
             <Table.Summary>
               <Table.Summary.Row>
-                <Table.Summary.Cell index={index}>
-                  <h2></h2>
-                </Table.Summary.Cell>
-                <Table.Summary.Cell index={index}>
-                  <h2></h2>
-                </Table.Summary.Cell>
+                <Table.Summary.Cell index={index}></Table.Summary.Cell>
+                <Table.Summary.Cell index={index}></Table.Summary.Cell>
 
                 <Table.Summary.Cell index={index}>
                   <h2>Total</h2>
