@@ -10,7 +10,11 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+<<<<<<< HEAD
     "strict": false,   // changed
+=======
+    "strict": false,  //changed
+>>>>>>> aead5a30bb652e1fcf42e1404796d9246709e8ed
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
