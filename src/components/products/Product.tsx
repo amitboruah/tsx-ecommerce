@@ -3,7 +3,7 @@ import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CountContext } from "../../context/CountContext";
-import { addToCart, removeToCart } from "../../redux/action";
+import { addToCart, removeToCart } from "../../redux/product/action";
 import "./product.scss";
 
 export default function Product() {

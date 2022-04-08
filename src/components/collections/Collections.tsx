@@ -2,7 +2,7 @@ import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
-import { addToCart, fetchData } from "../../redux/action";
+import { addToCart, fetchData } from "../../redux/product/action";
 import "react-toastify/dist/ReactToastify.css";
 import "./collection.scss";
 import { useNavigate } from "react-router-dom";

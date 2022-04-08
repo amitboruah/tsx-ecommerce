@@ -1,9 +1,8 @@
 const initialValue: any = {
   productData: [],
-  cart:[]
 };
 
-const postReducers = (state = initialValue, action: any) => {
+const productReducers = (state = initialValue, action: any) => {
   switch (action.type) {
     case "GET_DATA_SUCCESS":
       // console.log("get success");
@@ -33,4 +32,4 @@ const postReducers = (state = initialValue, action: any) => {
   }
 };
 
-export default postReducers;
+export default productReducers;

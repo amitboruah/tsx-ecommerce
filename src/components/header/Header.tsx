@@ -3,7 +3,7 @@ import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useContext, useEffect} from "react";
-import { addToCart, removeToCart } from "../../redux/action";
+import { addToCart, removeToCart } from "../../redux/product/action";
 import { useNavigate } from "react-router-dom";
 import { CountContext } from "../../context/CountContext";
 
