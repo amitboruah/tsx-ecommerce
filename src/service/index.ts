@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 // const navigate = useNavigate();
 
+
 // Axios NoAuth Instance
 
 export const ServiceInstance: AxiosInstance = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: process.env.REACT_APP_BASE_URL,
   headers: {
     "content-type": "application/json",
     accept: "application/json",
@@ -15,7 +16,7 @@ export const ServiceInstance: AxiosInstance = axios.create({
 
 // Axios Auth Instance
 export const ServiceAuthInstance: any = axios.create({
-  baseURL: process.env.BASE_URL,
+  baseURL: process.env.REACT_BASE_URL,
   headers: {
     "content-type": "application/json",
     accept: "application/json",
@@ -44,6 +45,8 @@ ServiceAuthInstance.interceptors.request.use((config) => {
 //Handle noAuth request
 
 ServiceInstance.interceptors.request.use((config) => {
+  // console.log(base, "base url");
+  
   return config;
 });
 

@@ -14,7 +14,9 @@ export const login = (payload) => {
 
 //Signup
 
-export const signup = (payload) => {
+export const signup = (payload:any) => {
+  console.log("from auth");
+  
   return ServiceInstance({
     method: "POST",
     url: apiUrl.SIGNUP,

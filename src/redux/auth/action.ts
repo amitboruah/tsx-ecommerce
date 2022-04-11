@@ -14,7 +14,8 @@ const actions = {
     payload: payload,
   }),
 
-  signup: (payload:any) => ({
+  signupReq: (payload:any) => (
+    {    
     type: actions.SIGNUP,
     payload: payload,
   }),

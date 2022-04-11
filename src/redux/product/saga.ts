@@ -11,6 +11,7 @@ const datafetch = async () => {
 };
 
 function* getItems(): any {
+  
   const data = yield call(datafetch);
   yield put({ type: "GET_DATA_SUCCESS", data });
 }
