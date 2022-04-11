@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
+// const navigate = useNavigate();
 
 // Axios NoAuth Instance
 
@@ -32,7 +32,7 @@ export const apiUrl = {
 
 ServiceAuthInstance.interceptors.request.use((config) => {
   if (!localStorage.getItem("access_token")) {
-    return navigate("/");
+    // return navigate("/");
   }
 
   config.headers["Authorization"] = localStorage.getItem("access_token")

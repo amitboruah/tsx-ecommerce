@@ -245,12 +245,12 @@ export default function Header() {
                       </a>
                     </li>
                     <li className="scroll">
-                      <a href="#blog" onClick={() => navigate("/")}>
+                      <a href="#blog" onClick={() => navigate("/home")}>
                         blog
                       </a>
                     </li>
                     <li className="scroll">
-                      <a href="#newsletter" onClick={() => navigate("/")}>
+                      <a href="#newsletter" onClick={() => navigate("/home")}>
                         contact
                       </a>
                     </li>

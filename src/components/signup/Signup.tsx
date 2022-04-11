@@ -1,44 +1,87 @@
-import { Form, Button, Input} from "antd";
+import { Form, Button, Input, Select, Radio } from "antd";
 import "./signup.scss";
-// import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import worldMapData from "city-state-country";
+import { Country, State, City } from 'country-state-city';
 
 export default function Signup() {
-//   const navigate = useNavigate()
+  const [state, setState] = useState(true);
+  const [country, setCountry] = useState(true);
+
+  const [countryData, setCountryData] = useState("");
+  const [stateData, setStateData] = useState("");
+
+  const navigate = useNavigate();
+  // console.log(Country.getAllCountries(),"data");
+  
 
   return (
-    <div className="form">
-      <div className="form-header">
+    <div className="signup">
+      <div className="signup-form">
         <Form
           autoComplete="off"
-          labelCol={{ span: 10 }}
-          wrapperCol={{ span: 14 }}
+          labelCol={{ span: 7 }}
+          wrapperCol={{ span: 15 }}
           onFinish={(values) => {
             localStorage.setItem("USER", JSON.stringify({ ...values }));
-            console.log("DATA SUBMITTED");
-            // navigate("/signin")
+            console.log(values,"DATA SUBMITTED");
+            navigate("/");
           }}
         >
           <h2>Create Account</h2>
 
           <Form.Item
-            name="fullname"
+            name="First_name"
             label="Full Name"
             rules={[
               {
                 required: true,
-                message: "Please enter your Name",
+                message: "Please enter your First Name",
               },
               { whitespace: true },
-              { min: 3 ,
-              message:"must be more than 3"},
+              { min: 3, message: "must be more than 3" },
             ]}
             hasFeedback
           >
-            <Input placeholder="Type your name" />
+            <Input placeholder="Type your first name" />
           </Form.Item>
 
           <Form.Item
-            name="email"
+            name="Last_name"
+            label="Last Name"
+            rules={[
+              {
+                required: true,
+                message: "Please enter your Last Name",
+              },
+              { whitespace: true },
+              { min: 3, message: "must be more than 3" },
+            ]}
+            hasFeedback
+          >
+            <Input placeholder="Type your last name" />
+          </Form.Item>
+
+          <Form.Item
+            name="gender"
+            label="Gender"
+            rules={[
+              {
+                required: true,
+                message: "Please select Gender",
+              },
+            ]}
+          >
+            <Radio.Group>
+              <Radio value="male">Male</Radio>
+              <Radio value="female">Female</Radio>
+              <Radio value="other">Other</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+          <Form.Item
+            name="Email"
             label="Email"
             rules={[
               {
@@ -53,54 +96,96 @@ export default function Signup() {
           </Form.Item>
 
           <Form.Item
-            name="password"
+            name="Password"
             label="Password"
             rules={[
               {
                 required: true,
                 message: "Password is required",
               },
-              { min: 6, message: "Password must be min 6" },
+              { min: 8, message: "Password must be min 8" },
             ]}
           >
             <Input.Password placeholder="Type your Password" />
           </Form.Item>
 
-          {/* <Form.Item
-            name="gender"
-            label="Gender"
+          <Form.Item
+            name="Country"
+            label="Country"
             rules={[
               {
                 required: true,
-                message: "Please select Gender",
+                message: "Please select Country",
               },
             ]}
           >
-            <Select>
-              <Select.Option value="male">Male</Select.Option>
-              <Select.Option value="female">Female</Select.Option>
+            <Select
+              onChange={(value) => {
+                setCountryData(value);
+                setState(false);
+              }}
+            >
+              {Country.getAllCountries().map((ele: any,ky:number) => {
+                return (
+                  <Select.Option value={ele.name} key={ky}>{ele.name}</Select.Option>
+                );
+              })}
             </Select>
-          </Form.Item> */}
+          </Form.Item>
 
-          {/* <Form.Item
-            name="dob"
-            label="Date of Birth"
+          <Form.Item
+            name="State"
+            label="State"
             rules={[
               {
                 required: true,
-                message: "Please provide your Date of Birth",
+                message: "Please select State",
               },
             ]}
           >
-            <DatePicker
-              picker="date"
-              placeholder="Choose a Date"
-              style={{ width: "100%" }}
-            />
-          </Form.Item> */}
+            <Select
+              disabled={state}
+              onChange={(value) => {
+                setStateData(value);
+                setCountry(false);
+              }}
+            >
+              {worldMapData
+                .getAllStatesFromCountry(countryData)
+                .map((ele: any,ky:number) => {
+                  return (
+                    <Select.Option value={ele.name} key={ky}>{ele.name}</Select.Option>
+                  );
+                })}
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            name="City"
+            label="City"
+            rules={[
+              {
+                required: true,
+                message: "Please select City",
+              },
+            ]}
+          >
+            <Select disabled={country}>
+              {worldMapData.getAllCitiesFromState(stateData).map((ele: any,ky:number) => {
+                return (
+                  <Select.Option value={ele.name} key={ky}>{ele.name}</Select.Option>
+                );
+              })}
+            </Select>
+          </Form.Item>
 
           <Form.Item wrapperCol={{ span: 24 }}>
-            <Button className="button" type="primary" htmlType="submit" style={{ width: "100%" , borderRadius:"5px"}}>
+            <Button
+              className="button"
+              type="primary"
+              htmlType="submit"
+              style={{ width: "100%", borderRadius: "5px" }}
+            >
               Register
             </Button>
           </Form.Item>

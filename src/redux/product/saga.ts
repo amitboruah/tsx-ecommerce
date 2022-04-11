@@ -21,10 +21,6 @@ function* getSaga() {
 
 
 
-
-
-
-
 const productSaga = [fork(getSaga)];
 
 export default productSaga;

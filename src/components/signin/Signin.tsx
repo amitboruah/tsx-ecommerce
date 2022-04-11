@@ -1,6 +1,7 @@
 import { useState} from "react";
 import { Form, Button, Input } from "antd";
 import "./signin.scss";
+import { useNavigate } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 // import { ProductContext } from "./context/ProductContext";
 
@@ -8,6 +9,7 @@ export default function Signin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate()
   // const { setLogin ,login} = useContext(ProductContext);
 
   // const navigate = useNavigate();
@@ -35,7 +37,7 @@ export default function Signin() {
       <div className="form-header">
         <Form
           autoComplete="off"
-          labelCol={{ span: 10 }}
+          labelCol={{ span: 8 }}
           wrapperCol={{ span: 14 }}
           // onFinish={authenticate}
         >
@@ -87,8 +89,8 @@ export default function Signin() {
             </Button>
           </Form.Item>
 
-          <a href="#">
-            <p className="already">create account</p>
+          <a href="">
+            <p className="already" onClick={()=>navigate("/Signup")}>create account</p>
           </a>
           <a href="#">
             <p className="already">Forgot password</p>

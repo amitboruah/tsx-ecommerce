@@ -15,6 +15,8 @@ import Error from "./components/errorPage/Error";
 import Checkout from "./components/checkout/Checkout";
 import Address from "./components/address/Address";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signup from "./components/signup/Signup";
+import Signin from "./components/signin/Signin";
 
 function App() {
   return (
@@ -24,9 +26,9 @@ function App() {
         {/* <Signup /> */}
 
         <Routes>
-          <Route path="/product/:id" element={<Product />} />
+          <Route path="/" element={<Signin />} />
           <Route
-            path="/"
+            path="/home"
             element={
               <>
                 <Carousel />
@@ -40,10 +42,12 @@ function App() {
               </>
             }
           />
-          <Route path="*" element={<Error />}></Route>
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/signup" element={<Signup  />}></Route>
           <Route path="/checkout" element={<Checkout />}></Route>
-          <Route path="/address" element={ <Address/>}></Route>
-
+          <Route path="/address" element={<Address />}></Route>
+          <Route path="/resetpassword" element={<Signup />}></Route>
+          <Route path="*" element={<Error />}></Route>
         </Routes>
         <Footers />
       </Router>
