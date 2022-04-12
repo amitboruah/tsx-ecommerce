@@ -28,7 +28,6 @@ export default function authReducer(state = initialState, action: any) {
       };
 
     case actions.SIGNUP:
-      // console.log("from reducer");
       return {
         ...initialState,
       };

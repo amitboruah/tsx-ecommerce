@@ -2,29 +2,31 @@ import { all, takeEvery, put, fork, call } from "redux-saga/effects";
 import { login, signup } from "../../service/auth";
 import actions from "./action";
 
-
-
 // for signup
 
 export function* signupReq() {
-  
-  yield takeEvery(actions.SIGNUP, function* (payload:any){
+  yield takeEvery(actions.SIGNUP, function* (payload: any) {
     console.log(payload, "saga payload");
-    
+
     try {
       const response = yield call(signup, payload.payload);
-      console.log("from saga", payload);
+      // console.log("from saga", payload);
 
       if (response.status) {
         yield put({
           type: actions.SIGNUP_SUCCESS,
           userSignupSuccess: response.Message,
         });
+        // window.location.href = "/";
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
 
       } else {
         yield put({
           type: actions.SIGNUP_FAILED,
-          error: response,
+          error: response.Message,
         });
       }
     } catch (error: unknown) {
@@ -33,22 +35,23 @@ export function* signupReq() {
   });
 }
 
-export function* loginRequest() {
+export function* loginReq() {
   yield takeEvery(
     actions.LOGIN_REQUEST,
-    function* ({ payload }: { type: string; payload: Record<string, string> }) {
+    function* (payload:any):any {
       try {
-        const response = yield call(login, payload);
-        if (response.data && response.data.is_email_verified !== false) {
-          yield put({
-            type: actions.LOGIN_SUCCESS,
-            token: response.data.access_token,
-            userData: response.data,
-          });
-          // store toke in LS
-          // navigate to home page
-          //navigate user to home screen
-          //   navigate("/")
+        const response = yield call(login, payload.payload);
+        if (response && response?.Email_verify) {
+          // yield put({
+          //   type: actions.LOGIN_SUCCESS,
+          //   token: response.data.access_Token,
+          //   userData: response.data,
+          // });
+          localStorage.setItem("token", response.access_Token)
+          console.log(response.access_Token, "saga token");
+          
+          window.location.href = "/home";
+          
         } else {
           yield put({
             type: actions.LOGIN_ERROR,
@@ -62,25 +65,7 @@ export function* loginRequest() {
   );
 }
 
+
 export default function* authSaga() {
-  yield all([fork(signupReq), fork(loginRequest)]);
+  yield all([fork(signupReq), fork(loginReq)]);
 }
-
-// import { call, put, takeEvery, fork } from "redux-saga/effects";
-// import { signup } from "../../service/auth";
-// import actions from "./action";
-
-// function* getItems(payload): any {
-//   const data = yield call(signup, payload);
-//   // yield put( actions.SIGNUP_SUCCESS, data );
-// }
-
-// function* getSaga() {
-//   console.log("sagas");
-
-//   yield takeEvery(actions.SIGNUP, getItems);
-// }
-
-// const authSaga = [fork(getSaga)];
-
-// export default authSaga;

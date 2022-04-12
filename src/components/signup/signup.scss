@@ -7,6 +7,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  position: relative;
+
+  
+  .loader{
+    width: 300px;
+    z-index: 5;
+    position: absolute;
+  }
 
   .signup-form {
     text-align: center !important;
@@ -18,9 +27,11 @@
     box-shadow: 5px 10px 20px 5px grey;
     border-radius: 20px;
     width: 28%;
+    
+    
 
     .button {
-      background-color: #e99c2e;
+      background-color:#e99c2e;
       border: none;
       border-radius: 10px !important  ;
 

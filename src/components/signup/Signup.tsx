@@ -1,42 +1,75 @@
-import { Form, Button, Input, Select, Radio, Alert, message } from "antd";
+import { Form, Button, Input, Select, Radio, message } from "antd";
 import "./signup.scss";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import worldMapData from "city-state-country";
-import { Country, State, City } from "country-state-city";
+// import worldMapData from "city-state-country";
+// import { Country, State, City } from "country-state-city";
 import actions from "../../redux/auth/action";
+import { error } from "../../utility";
+
 
 export default function Signup() {
   const [state, setState] = useState(true);
   const [country, setCountry] = useState(true);
+  const [loader, setLoader] = useState(false);
 
   const [countryData, setCountryData] = useState("");
   const [stateData, setStateData] = useState("");
 
   const dispatch = useDispatch();
-  const { userSignupSuccess } = useSelector(
-    (state: any): any => state.authReducer
+
+  const successMessage = useSelector(
+    (state: any): any => state.authReducer.userSignupSuccess
   );
 
-  // const navigate = useNavigate();
+  const errorMessage = useSelector(
+    (state: any): any => state.authReducer.signupError
+  );
 
-  console.log(userSignupSuccess, "from signup");
+  console.log(successMessage, "message from signup");
+  console.log(errorMessage, "error from signup");
+
   const handleOnFinish = (value) => {
     dispatch(actions.signupReq(value));
-    // <Alert message={userSignupSuccess} type="success" showIcon />;
-    message.success(userSignupSuccess)
+    setLoader(true);
+  };
+
+  useEffect(() => {
+    printSuccessMessage(successMessage);
+    printErrorMessage(errorMessage);
+  }, [successMessage, errorMessage]);
+
+  const printSuccessMessage = (msg: any) => {
+    if (msg) {
+      setLoader(false);
+      message.success(msg);
+    }
+  };
+  const printErrorMessage = (msg: any) => {
+    if (msg) {
+      setLoader(false);
+      message.error(msg);
+    }
   };
 
   return (
     <>
       <div className="signup">
+        
+        {loader ? (
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/54/Ajux_loader.gif"
+            alt="loading"
+            className="loader"
+          />
+        ) : null}
+
         <div className="signup-form">
           <Form
-            autoComplete="off"
+            // autoComplete="off"
             labelCol={{ span: 7 }}
             wrapperCol={{ span: 15 }}
-            onFinish={(val:any)=>handleOnFinish(val)}
+            onFinish={(val: any) => handleOnFinish(val)}
           >
             <h2>Create Account</h2>
 
@@ -46,10 +79,10 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Please enter your First Name",
+                  message: error.first_name,
                 },
                 { whitespace: true },
-                { min: 3, message: "must be more than 3" },
+                { min: 3, message: error.min_character },
               ]}
               hasFeedback
             >
@@ -62,10 +95,10 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Please enter your Last Name",
+                  message: error.last_name,
                 },
                 { whitespace: true },
-                { min: 3, message: "must be more than 3" },
+                { min: 3, message: error.min_character },
               ]}
               hasFeedback
             >
@@ -78,7 +111,7 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Please select Gender",
+                  message: error.gender,
                 },
               ]}
             >
@@ -95,9 +128,9 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Please enter your Email",
+                  message: error.email,
                 },
-                { type: "email", message: "Enter the valid Email" },
+                { type: "email", message: error.valid_email },
               ]}
               hasFeedback
             >
@@ -110,13 +143,12 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Password is required",
+                  message: error.password,
                 },
-                { min: 8, message: "Password must be min 8" },
                 {
                   pattern:
-                    /( (?=.*\d) |(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
-                  message: "incorrect format",
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#_])[A-Za-z\d@$!%*?&]{8,}$/,
+                  message: error.password_regex,
                 },
               ]}
             >
@@ -129,7 +161,7 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Please select Country",
+                  message: error.country,
                 },
               ]}
             >
@@ -155,7 +187,7 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Please select State",
+                  message: error.state,
                 },
               ]}
             >
@@ -185,7 +217,7 @@ export default function Signup() {
               rules={[
                 {
                   required: true,
-                  message: "Please select City",
+                  message: error.city,
                 },
               ]}
             >

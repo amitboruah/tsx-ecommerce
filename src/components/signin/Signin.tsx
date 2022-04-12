@@ -1,36 +1,26 @@
-import { useState} from "react";
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input} from "antd";
 import "./signin.scss";
 import { useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
-// import { ProductContext } from "./context/ProductContext";
+import { useDispatch, useSelector } from "react-redux";
+import actions from "../../redux/auth/action";
+import { error } from "../../utility";
+
 
 export default function Signin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-  // const { setLogin ,login} = useContext(ProductContext);
+  const dispatch = useDispatch();
 
-  // const navigate = useNavigate();
+  const data = useSelector(
+    (state: any): any => state.authReducer.userSignupSuccess
+  );
 
-  // const authenticate = () => {
-  // let data = JSON.parse(localStorage.getItem("USER"));
+  console.log(data, "from login");
 
-  // if (data.email === email && data.password === password) {
-  //   localStorage.setItem("loggedIn", JSON.stringify([email]));
-  // const logData = localStorage.getItem("loggedIn");
-
-  //     setLogin(data.email);
-  //     navigate("/product");
-  //   } else {
-  //     alert("wrong Credential");
-  //   }
-  // };
-
-  //  useEffect(()=>{
-  //     console.log("login from useffect ",login);
-  //   },[login])
+  const handleOnFinish = (value: any): any => {
+    console.log(value, "login");
+    dispatch(actions.loginReq(value));
+  };
 
   return (
     <div className="form">
@@ -39,42 +29,40 @@ export default function Signin() {
           autoComplete="off"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 14 }}
-          // onFinish={authenticate}
+          onFinish={handleOnFinish}
         >
           <h2>Login</h2>
 
           <Form.Item
-            name="email"
+            name="Email"
             label="Email"
             rules={[
               {
                 required: true,
-                message: "Please enter your Email",
+                message: error.email,
               },
-              { type: "email", message: "Enter the valid Email" },
+              { type: "email", message: error.valid_email },
             ]}
             hasFeedback
           >
             <Input
               placeholder="Type your Email"
-              onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Item>
 
           <Form.Item
-            name="password"
+            name="Password"
             label="Password"
             rules={[
               {
                 required: true,
-                message: "Password is required",
+                message: error.password,
               },
-              { min: 6, message: "Password must be min 6" },
             ]}
           >
             <Input.Password
               placeholder="Type your Password"
-              onChange={(e) => setPassword(e.target.value)}
+              
             />
           </Form.Item>
 
@@ -90,7 +78,9 @@ export default function Signin() {
           </Form.Item>
 
           <a href="">
-            <p className="already" onClick={()=>navigate("/Signup")}>create account</p>
+            <p className="already" onClick={() => navigate("/Signup")}>
+              create account
+            </p>
           </a>
           <a href="#">
             <p className="already">Forgot password</p>

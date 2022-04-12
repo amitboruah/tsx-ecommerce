@@ -9,7 +9,7 @@ const actions = {
 
   CLEAR_ERROR: "CLEAR_ERROR",
 
-  login: (payload:any) => ({
+  loginReq: (payload:any) => ({
     type: actions.LOGIN_REQUEST,
     payload: payload,
   }),

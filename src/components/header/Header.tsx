@@ -1,22 +1,18 @@
 import "./header.scss";
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useContext, useEffect} from "react";
+import React, { useContext, useEffect } from "react";
 import { addToCart, removeToCart } from "../../redux/product/action";
 import { useNavigate } from "react-router-dom";
 import { CountContext } from "../../context/CountContext";
+import { authenticated } from "../../utility";
 
 export default function Header() {
   const dispatch = useDispatch();
-  const cartData = useSelector((state: any) => state.prodlist.productData); 
+  const cartData = useSelector((state: any) => state.prodlist.productData);
   const navigate = useNavigate();
-  const { count, product, setProduct ,price, setPrice} = useContext(CountContext);
-
-  const { loginWithRedirect, isAuthenticated, logout ,}: Auth0ContextInterface =
-    useAuth0();
-
-  const { user }: any = useAuth0();
+  const { count, product, setProduct, price, setPrice , setCount } =
+    useContext(CountContext);
 
   const addToTheCart = () => {
     setProduct(updatedCart());
@@ -41,15 +37,22 @@ export default function Header() {
   const total = () => {
     product
       .map((data: any) => data.qty * data.price)
-      .map((e:any) => {
+      .map((e: any) => {
         sum = sum + e;
         setPrice(sum);
       });
   };
 
+
+  const handleLogout = ()=>{
+    localStorage.clear()
+    navigate("/")
+    // setCount(count + 1)
+  }
+
   useEffect(() => {
     addToTheCart();
-  }, [count]);
+  }, [count,authenticated]);
 
   return (
     <>
@@ -89,11 +92,9 @@ export default function Header() {
                       </a>
                     </li>
 
-                    {/* {console.log(cartData, "from header")} */}
-
-                    {isAuthenticated ? (
+                    {authenticated ? (
                       <>
-                        <li>
+                        {/* <li>
                           <a href="#">
                             <p className="username">
                               Hi, &nbsp;
@@ -104,22 +105,15 @@ export default function Header() {
                               </span>
                             </p>
                           </a>
-                        </li>
-                        <li className="logout icon">
-                          <a href="#" onClick={() => logout()}>
+                        </li> */}
+                        <li className="logout icon" onClick={handleLogout}>
+                          <a href="#">
                             <LogoutOutlined />
                           </a>
                           <div className="iconDetail">Logout</div>
                         </li>
                       </>
-                    ) : (
-                      <li className="login icon">
-                        <a href="#" onClick={() => loginWithRedirect()}>
-                          <UserOutlined />
-                        </a>
-                        <div className="iconDetail">Login</div>
-                      </li>
-                    )}
+                    ) : null}
 
                     <li className="dropdown">
                       <a
@@ -137,69 +131,80 @@ export default function Header() {
                       </a>
                       {/* {console.log(cartData, " teststsets")} */}
 
-                    {isAuthenticated && (
-
-                      <ul
-                        className="dropdown-menu cart-list s-cate"
-                        onMouseOver={() => addToTheCart()}
-                      >
-                        {product.map((data: any, ky: number) => {
-                          return (
-                            <React.Fragment key={ky}>
-                              <li className="single-cart-list">
-                                <a className="photo">
-                                  <img
-                                    src={data.img}
-                                    className="cart-thumb"
-                                    alt="image"
-                                  />
-                                </a>
-                                <div className="cart-list-txt">
-                                  <h6>
-                                    <a>{data.name}</a>
-                                  </h6>
-                                  <p>
-                                    {data.qty} qty{" "}
-                                    <span className="price">
-                                      $ {data.price}
-                                    </span>
-                                  </p>
-                                </div>
-                                <div
-                                  className="cart-close"
-                                  style={{ marginTop: "10px" }}
-                                >
-                                  <span
-                                    className="lnr "
-                                    onClick={() => itemAdded(data.id)}
-                                    style={{ fontSize: "24px" , color: "grey" }}
-                                  >
-                                    +
-                                  </span>
-                                </div>
-                                <div className="cart-close"
-                                  style={{ marginTop: "30px" }}
-                                  >
-                                  <span
-                                    className="lnr"
-                                    onClick={() => handleRemove(data.id)}
-                                    style={{ fontSize: "40px", color: "lightGrey" }}
-                                  >
-                                    -
-                                  </span>
-                                </div>
-                              </li>
-                            </React.Fragment>
-                          );
-                        })}
-                        <li className="total">
-                          <span>Total: $ {price}</span>
-                          <button className="btn-cart pull-right" onClick={()=>navigate("/checkout")}>
-                            Checkout
-                          </button>
-                        </li>
-                      </ul>
-                        )} 
+                      {authenticated ? (
+                        <>
+                          <ul
+                            className="dropdown-menu cart-list s-cate"
+                            onMouseOver={() => addToTheCart()}
+                          >
+                            {product.map((data: any, ky: number) => {
+                              return (
+                                <React.Fragment key={ky}>
+                                  <li className="single-cart-list">
+                                    <a className="photo">
+                                      <img
+                                        src={data.img}
+                                        className="cart-thumb"
+                                        alt="image"
+                                      />
+                                    </a>
+                                    <div className="cart-list-txt">
+                                      <h6>
+                                        <a>{data.name}</a>
+                                      </h6>
+                                      <p>
+                                        {data.qty} qty{" "}
+                                        <span className="price">
+                                          $ {data.price}
+                                        </span>
+                                      </p>
+                                    </div>
+                                    <div
+                                      className="cart-close"
+                                      style={{ marginTop: "10px" }}
+                                    >
+                                      <span
+                                        className="lnr "
+                                        onClick={() => itemAdded(data.id)}
+                                        style={{
+                                          fontSize: "24px",
+                                          color: "grey",
+                                        }}
+                                      >
+                                        +
+                                      </span>
+                                    </div>
+                                    <div
+                                      className="cart-close"
+                                      style={{ marginTop: "30px" }}
+                                    >
+                                      <span
+                                        className="lnr"
+                                        onClick={() => handleRemove(data.id)}
+                                        style={{
+                                          fontSize: "40px",
+                                          color: "lightGrey",
+                                        }}
+                                      >
+                                        -
+                                      </span>
+                                    </div>
+                                  </li>
+                                </React.Fragment>
+                              );
+                            })}
+                            <li className="total">
+                              <span>Total: $ {price}</span>
+                              <button
+                                className="btn-cart pull-right"
+                                onClick={() => navigate("/checkout")}
+                              >
+                                Checkout
+                              </button>
+                            </li>
+                          </ul>
+                        </>
+                      ) : null}
                     </li>
                   </ul>
                 </div>
@@ -229,21 +234,29 @@ export default function Header() {
                     data-in="fadeInDown"
                     data-out="fadeOutUp"
                   >
-                    <li className=" scroll active">
-                      <a href="#home" onClick={() => navigate("/")}>
-                        home
-                      </a>
-                    </li>
-                    <li className="scroll">
-                      <a href="#new-arrivals" onClick={() => navigate("/")}>
-                        new arrival
-                      </a>
-                    </li>
-                    <li className="scroll">
-                      <a href="#feature" onClick={() => navigate("/")}>
-                        features
-                      </a>
-                    </li>
+                    {authenticated ? (
+                      <>
+                        <li className=" scroll active">
+                          <a href="#home" onClick={() => navigate("/home")}>
+                            home
+                          </a>
+                        </li>
+                        <li className="scroll">
+                          <a
+                            href="#new-arrivals"
+                            onClick={() => navigate("/home")}
+                          >
+                            new arrival
+                          </a>
+                        </li>
+                        <li className="scroll">
+                          <a href="#feature" onClick={() => navigate("/home")}>
+                            features
+                          </a>
+                        </li>
+                      </>
+                    ) : null}
+
                     <li className="scroll">
                       <a href="#blog" onClick={() => navigate("/home")}>
                         blog
