@@ -1,93 +1,148 @@
-import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
-import { addToCart, fetchData } from "../../redux/product/action";
+import actions from "../../redux/product/action";
 import "react-toastify/dist/ReactToastify.css";
 import "./collection.scss";
 import { useNavigate } from "react-router-dom";
 import { CountContext } from "../../context/CountContext";
 import { Pagination } from "antd";
+import { authenticated } from "../../utility";
+import { SearchOutlined } from "@ant-design/icons";
 
 export default function Collections() {
+
+const[searchText , setSearchText] = useState("")
+
   // for pagination
 
-  const [currentPage, setCurrentPage] = useState(2);
-  const [postPerPage, setPostPerPage] = useState(7);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(8);
 
-  const { isAuthenticated, loginWithRedirect }: Auth0ContextInterface =
-    useAuth0();
+  // for loader
+  const [loader, setLoader] = useState(false);
+
   const navigate = useNavigate();
 
   const { count, setCount } = useContext(CountContext);
 
   const dispatch = useDispatch();
   const prodData = useSelector((state: any) => state.prodlist.productData);
-  // console.log(prodData);
+  const totalProduct = useSelector((state: any) => state.prodlist.totalItem);
 
-  
+  console.log(prodData, "prod details");
+
   const handleAddToCart = (id: number): void => {
     // console.log(id);
-    isAuthenticated ? itemAdded(id) : redirectToLogin();
+    // authenticated ? itemAdded(id) : null;
   };
 
   const itemAdded = (id: number) => {
-    dispatch(addToCart(id));
+    dispatch(actions.addToCart(id));
     setCount(count + 1);
   };
 
-  const redirectToLogin = (): void => {
-    toast.error("Please Login First", {
-      position: "top-left",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    setTimeout(() => {
-      loginWithRedirect();
-    }, 3000);
+  const loading = () => {
+    dispatch(actions.fetchData(paginate));
+
+    if (prodData.length > 0) {
+      setLoader(false);
+    }
   };
 
+  const paginate = {
+    page: currentPage,
+    perpage: postPerPage,
+  };
+
+  //pagination
   const handleOnChange = (page: number, pageSize: number) => {
     setCurrentPage(page);
     setPostPerPage(pageSize);
+
+    let paginate = {
+      page: page,
+      perpage: pageSize,
+    };
+
+    dispatch(actions.fetchData(paginate));
   };
-  
-  
-  //pagination
-  
-  const indexOfLastProd = currentPage * postPerPage;
-  const indexOfFirstProd = indexOfLastProd - postPerPage;
-  const currentProd = prodData.slice(indexOfFirstProd, indexOfLastProd);
-  
+
+  //sort
+
+  const handleSort = (e: any, value: any): any => {
+    e.preventDefault();
+    const sort = {
+      sort: value,
+    };
+    dispatch(actions.fetchData(sort));
+  };
+
+  //search
+
+  const handleSearch = (e:any)=>{
+    setSearchText(e.target.value)
+  }
+  const searchedData ={
+    "SearchByName":searchText
+  }
+  const handleSearchBtn = ()=>{
+    dispatch(actions.fetchData(searchedData));
+  }
+
   useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch, setCurrentPage]);
+    loading();
+  }, []);
   return (
     <>
       <section id="new-arrivals" className="new-arrivals">
         <div className="container">
           <div className="section-header">
-            <h2>new arrivals</h2>
+            <h2>Collections</h2>
+            {loader ? (
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/5/54/Ajux_loader.gif"
+                alt="loading"
+                className="loader"
+              />
+            ) : null}
           </div>
+
           <div className="sort">
             <h3>Sort By:</h3>
-            <a href="">
-              High to low ↑ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </a >
-            <a href="">Low to high ↓ </a>
+            <a
+              href=""
+              onClick={(e) => {
+                handleSort(e, "DESC");
+              }}
+            >
+              High to low ↑ 
+            </a>
+            <a
+              href=""
+              onClick={(e) => {
+                handleSort(e, "ASC");
+              }}
+            >
+              Low to high ↓{" "}
+            </a>
+          </div>
+          <div className="search" onChange={(e)=>{handleSearch(e)}}>
+            <input type="text" />
+            <SearchOutlined onClick={handleSearchBtn} className="searchBtn" style={{}}/>
           </div>
           <div className="new-arrivals-content">
             <div className="row">
-              {currentProd.map((data: any, ky: number) => {
+              {prodData.map((data: any, ky: number) => {
                 return (
                   <div className="col-md-3 col-sm-4" key={ky}>
                     <div className="single-new-arrival">
                       <div className="single-new-arrival-bg">
-                        <img src={data.img} alt="new-arrivals images" />
+                        <img
+                          src={data.image}
+                          alt="new-arrivals images"
+                          className="productImg"
+                        />
                         <div className="single-new-arrival-bg-overlay"></div>
                         <div className="sale bg-1">
                           <p>sale</p>
@@ -95,13 +150,14 @@ export default function Collections() {
                         <div className="new-arrival-cart">
                           <p>
                             <span className="lnr lnr-cart"></span>
-                            {
-                              isAuthenticated && (
-                                <a href="" onClick={() => handleAddToCart(data.id)}>
-                              add <span>to </span> cart
-                            </a>
-                              )
-                            }
+                            {authenticated && (
+                              <a
+                                href=""
+                                onClick={() => handleAddToCart(data.id)}
+                              >
+                                add <span>to </span> cart
+                              </a>
+                            )}
                             <ToastContainer className="tostify" />
                           </p>
                           <p className="arrival-review pull-right">
@@ -114,11 +170,14 @@ export default function Collections() {
                         </div>
                       </div>
                       <h4>
-                        <a href="#dumy" onClick={() => navigate(`/product/${data.id}`)}>
-                          {data.name}
+                        <a
+                          href=""
+                          onClick={() => navigate(`/product/${data.id}`)}
+                        >
+                          {data.Product_name}
                         </a>
                       </h4>
-                      <p className="arrival-product-price">$ {data.price}</p>
+                      <p className="arrival-product-price">₹ {data.Price}</p>
                     </div>
                   </div>
                 );
@@ -127,12 +186,12 @@ export default function Collections() {
           </div>
           {
             <Pagination
-              total={prodData.length}
+              total={totalProduct}
               showTotal={(total) => `Total ${total} items`}
               defaultPageSize={postPerPage}
               defaultCurrent={currentPage}
               showQuickJumper
-              pageSizeOptions={[4, 7, 10]}
+              pageSizeOptions={[8, 16, 20]}
               showSizeChanger
               onChange={handleOnChange}
             />

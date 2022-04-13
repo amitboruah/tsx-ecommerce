@@ -1,3 +1,5 @@
+import './blog.scss'
+
 export default function Blogs() {
   return (
     <>

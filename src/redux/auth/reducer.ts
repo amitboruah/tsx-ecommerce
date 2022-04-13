@@ -5,6 +5,7 @@ const initialState = {
   signup: "",
   signupError: "",
   userSignupSuccess: "",
+  loginError:""
 };
 
 export default function authReducer(state = initialState, action: any) {

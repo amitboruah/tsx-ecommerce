@@ -23,3 +23,6 @@ export const error = {
 }
 
 export const authenticated = localStorage.getItem("token")
+
+export const user = localStorage.getItem("user")
+

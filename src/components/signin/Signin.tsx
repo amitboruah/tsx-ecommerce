@@ -1,32 +1,48 @@
-import { Form, Button, Input} from "antd";
+import { Form, Button, Input, message } from "antd";
 import "./signin.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import actions from "../../redux/auth/action";
-import { error } from "../../utility";
-
+import { authenticated, error } from "../../utility";
+import { useEffect, useState } from "react";
 
 export default function Signin() {
+  const [loader, setLoader] = useState(false);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const data = useSelector(
-    (state: any): any => state.authReducer.userSignupSuccess
+  const errorMessage = useSelector(
+    (state: any): any => state.authReducer.loginError
   );
 
-  console.log(data, "from login");
-
   const handleOnFinish = (value: any): any => {
-    console.log(value, "login");
     dispatch(actions.loginReq(value));
+    setLoader(true)
+  };
+  const printErrorMessage = (msg: any) => {
+    if (msg) {
+      setLoader(false);
+      message.error(msg);
+    }
   };
 
+  useEffect(() => {
+    printErrorMessage(errorMessage);
+  }, [errorMessage]);
   return (
     <div className="form">
+      {loader?(
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/5/54/Ajux_loader.gif"
+          alt="loading"
+          className="loader"
+        />
+      ) : null}
       <div className="form-header">
         <Form
-          autoComplete="off"
+          // autoComplete="off" 
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 14 }}
           onFinish={handleOnFinish}
@@ -45,9 +61,7 @@ export default function Signin() {
             ]}
             hasFeedback
           >
-            <Input
-              placeholder="Type your Email"
-            />
+            <Input placeholder="Type your Email" />
           </Form.Item>
 
           <Form.Item
@@ -60,10 +74,7 @@ export default function Signin() {
               },
             ]}
           >
-            <Input.Password
-              placeholder="Type your Password"
-              
-            />
+            <Input.Password placeholder="Type your Password" />
           </Form.Item>
 
           <Form.Item wrapperCol={{ span: 24 }}>

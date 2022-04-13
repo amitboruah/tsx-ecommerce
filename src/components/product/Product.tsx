@@ -1,33 +1,33 @@
-import { useContext } from "react";
-import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react";
+import { useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { CountContext } from "../../context/CountContext";
-import { addToCart, removeToCart } from "../../redux/product/action";
+import actions from "../../redux/product/action";
 import "./product.scss";
+import { authenticated } from "../../utility";
 
 export default function Product() {
   const dispatch = useDispatch();
   const cartData = useSelector((state: any) => state.prodlist.productData);
   const { product, setProduct, setPrice } = useContext(CountContext);
-  const { isAuthenticated }: Auth0ContextInterface = useAuth0();
+ 
 
   const { id }: any = useParams();
 
-  console.log(id, " id from product");
+  // console.log(id, " id from product");
 
   const prodData = useSelector((state: any) => state.prodlist.productData);
   const productData = prodData.filter((e: any) => e.id === parseInt(id));
 
-  // console.log(productData);
+  console.log(prodData);
 
   const handleAdd = (id: any) => {
-    dispatch(addToCart(id));
+    dispatch(actions.addToCart(id));
     setProduct(updatedCart());
   };
   const handleRemove = (data: number) => {
     if (productData[0].qty > 0) {
-      dispatch(removeToCart(data));
+      dispatch(actions.removeFromCart(data));
       addToTheCart();
     }
   };
@@ -53,21 +53,27 @@ export default function Product() {
       });
   };
 
+
+  useEffect(()=>{
+    // dispatch(actions.fetchData())
+  },[])
+
+
   return (
     <>
       <div className="products row">
         <div className="left col">
-          <img src={`../${productData[0].img}`} alt="img" />
+          {/* <img src={productData[0].image} alt="img" /> */}
         </div>
         <div className="right col ">
-          <h2 className="title">{productData[0].name}</h2>
+          <h2 className="title">{productData[0].Product_name}</h2>
           <div className="container">
-            <p className="description">{productData[0].desc}</p>
+            <p className="description">{productData[0].Desctiption}</p>
 
             <h4 className="price">
-              price <span>$ {productData[0].price}</span>
+              price <span>$ {productData[0].Price}</span>
             </h4>
-            {isAuthenticated && (
+            {authenticated && (
               <div className="addContainer">
                 <button onClick={() => handleAdd(productData[0].id)}>
                   Add to Cart

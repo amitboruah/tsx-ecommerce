@@ -1,14 +1,23 @@
-const initialValue: any = {
+import actions from "./action";
+
+const initialValue = {
   productData: [],
+  totalItem:""
+
 };
 
 const productReducers = (state = initialValue, action: any) => {
   switch (action.type) {
-    case "GET_DATA_SUCCESS":
-      // console.log("get success");
-      return { ...state, productData: action.data };
+    case actions.GET_DATA_SUCCESS:
+      // console.log(action.payload  , "get success");
+      return { ...state, productData: action.payload.data ,
+        totalItem:action.payload.total};
 
-    case "ADD_TO_CART":
+    // case actions.GET_DATA_FAIL:
+    //   console.log(action.response, "get Fail");
+    //   return {getProductError: action.response };
+
+    case actions.ADD_TO_CART:
       const add = state.productData.findIndex(
         (e: any) => e.id === action.payload
       );
@@ -18,7 +27,7 @@ const productReducers = (state = initialValue, action: any) => {
         ...state,
       };
 
-    case "REMOVE_TO_CART":
+    case actions.REMOVE_FROM_CART:
       const remove = state.productData.findIndex(
         (e: any) => e.id === action.payload
       );

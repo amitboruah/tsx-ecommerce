@@ -1,7 +1,4 @@
 import axios, { AxiosInstance } from "axios";
-import { useNavigate } from "react-router-dom";
-
-// const navigate = useNavigate();
 
 
 // Axios NoAuth Instance
@@ -27,13 +24,14 @@ export const ServiceAuthInstance: any = axios.create({
 export const apiUrl = {
   SIGNUP: "/user/register",
   LOGIN: "/user/login",
+
+  ALL_PRODUCTS:"/products/filterproduct"
 };
 
 //Handle Auth request
 
 ServiceAuthInstance.interceptors.request.use((config) => {
   if (!localStorage.getItem("access_token")) {
-    // return navigate("/");
   }
 
   config.headers["Authorization"] = localStorage.getItem("access_token")
@@ -45,16 +43,14 @@ ServiceAuthInstance.interceptors.request.use((config) => {
 //Handle noAuth request
 
 ServiceInstance.interceptors.request.use((config) => {
-  // console.log(base, "base url");
-  
   return config;
 });
 
 //Handle Auth response
 
 ServiceAuthInstance.interceptors.response.use(
-  (response) => response,
-  (error) => {
+  (response:any) => response,
+  (error:any) => {
     ServiceAuthInstance.interceptors.response.reject(ServiceAuthInstance);
     return error?.response
   }

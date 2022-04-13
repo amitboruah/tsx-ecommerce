@@ -10,14 +10,12 @@ export function* signupReq() {
 
     try {
       const response = yield call(signup, payload.payload);
-      // console.log("from saga", payload);
 
       if (response.status) {
         yield put({
           type: actions.SIGNUP_SUCCESS,
           userSignupSuccess: response.Message,
         });
-        // window.location.href = "/";
 
         setTimeout(() => {
           window.location.href = "/";
@@ -48,7 +46,7 @@ export function* loginReq() {
           //   userData: response.data,
           // });
           localStorage.setItem("token", response.access_Token)
-          console.log(response.access_Token, "saga token");
+          localStorage.setItem("user", response.Email)
           
           window.location.href = "/home";
           

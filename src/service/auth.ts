@@ -25,3 +25,16 @@ export const signup = (payload:any) => {
     },
   });
 };
+
+
+export const allproducts = (payload:any) => {
+  console.log("from auth");
+  
+  return ServiceInstance({
+    method: "POST",
+    url: apiUrl.ALL_PRODUCTS,
+    data: {
+      ...payload,
+    },
+  });
+};

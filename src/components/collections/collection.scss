@@ -1,3 +1,46 @@
+.new-arrivals{
+    margin-top: 5%;
+
+    .productImg{
+        width: 60%;
+    }
+
+    .loader{
+        width: 400px;
+    }
+    .sort{
+        h3{
+            color:#e99c2e;
+        }
+        a{
+            padding-right: 50px;
+            padding-bottom: 10px;
+            color: black;
+
+            &:hover{
+                color:grey
+            }
+        }
+    }
+    .search{
+        input{
+            padding: 5px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        .searchBtn{
+            font-Size:20px;
+             padding:10px;
+             color: black;
+             &:hover{
+                 color:#e99c2e;
+            }
+
+        }
+    }
+}
+
+
 .tostify{
     margin-top: 100px !important;
     z-index: 10 !important;

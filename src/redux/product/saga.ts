@@ -1,27 +1,25 @@
-import { call, put, takeEvery, fork } from "redux-saga/effects";
-import axios from "axios";
+import { call, put, takeEvery, fork, all } from "redux-saga/effects";
+import { allproducts } from "../../service/auth";
+import actions from "./action";
 
-const datafetch = async () => {
-  const res = await axios
-    .get("http://localhost:3000/products")
-    .then((response) => {
-      return response.data;
-    });
-  return res;
-};
 
-function* getItems(): any {
-  
-  const data = yield call(datafetch);
-  yield put({ type: "GET_DATA_SUCCESS", data });
+export function* getSaga() {
+  yield takeEvery(actions.FETCH_DATA, function* (payload:any):any {
+    // try {
+      // console.log(payload.payload , "from saga");
+      
+      const response = yield call(allproducts, payload.payload);
+      console.log(response, "from saga");
+    
+      if (response) {
+        yield put({ type: actions.GET_DATA_SUCCESS, payload: response});
+      }
+    // } catch (error: unknown) {
+    //   yield put({ type: actions.GET_DATA_FAIL , error: error });
+    // }
+  });
 }
 
-function* getSaga() {
-  yield takeEvery("FETCH_DATA", getItems);
+export default function* productSaga() {
+  yield all([fork(getSaga)]);
 }
-
-
-
-const productSaga = [fork(getSaga)];
-
-export default productSaga;

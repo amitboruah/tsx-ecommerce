@@ -1,17 +1,18 @@
 import "./header.scss";
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { LogoutOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useContext, useEffect } from "react";
-import { addToCart, removeToCart } from "../../redux/product/action";
+import React, { useContext, useEffect, useState } from "react";
+import actions from "../../redux/product/action";
 import { useNavigate } from "react-router-dom";
 import { CountContext } from "../../context/CountContext";
-import { authenticated } from "../../utility";
+import { authenticated , user} from "../../utility";
 
 export default function Header() {
+
   const dispatch = useDispatch();
   const cartData = useSelector((state: any) => state.prodlist.productData);
   const navigate = useNavigate();
-  const { count, product, setProduct, price, setPrice , setCount } =
+  const { count, product, setProduct, price, setPrice} =
     useContext(CountContext);
 
   const addToTheCart = () => {
@@ -19,12 +20,12 @@ export default function Header() {
     total();
   };
   const itemAdded = (id: number) => {
-    dispatch(addToCart(id));
+    dispatch(actions.addToCart(id));
     addToTheCart();
   };
 
   const handleRemove = (data: number) => {
-    dispatch(removeToCart(data));
+    dispatch(actions.removeFromCart(data));
     addToTheCart();
   };
 
@@ -43,16 +44,26 @@ export default function Header() {
       });
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
-  const handleLogout = ()=>{
-    localStorage.clear()
-    navigate("/")
-    // setCount(count + 1)
-  }
+  const handleLogo = () => {
+    if (authenticated) {
+      navigate("/home");
+    } else {
+      navigate("/");
+    }
+  };
+
+ const name = user?.split("@")
+
+ 
 
   useEffect(() => {
     addToTheCart();
-  }, [count,authenticated]);
+  }, [count, authenticated]);
 
   return (
     <>
@@ -65,73 +76,49 @@ export default function Header() {
               data-minus-value-mobile="55"
               data-speed="1000"
             >
-              <div className="top-search">
-                <div className="container">
-                  <div className="input-group">
-                    <span className="input-group-addon">
-                      <i className="fa fa-search"></i>
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search"
-                    />
-                    <span className="input-group-addon close-search">
-                      <i className="fa fa-times"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              
 
               <div className="container">
                 <div className="attr-nav">
                   <ul>
-                    <li className="search">
-                      <a href="#">
-                        <span className="lnr lnr-magnifier"></span>
-                      </a>
-                    </li>
 
                     {authenticated ? (
                       <>
-                        {/* <li>
+                        <li>
                           <a href="#">
                             <p className="username">
                               Hi, &nbsp;
                               <span>
-                                {user.given_name
-                                  ? user.given_name
-                                  : user.nickname}
+                                {name[0]}
                               </span>
                             </p>
                           </a>
-                        </li> */}
+                        </li>
                         <li className="logout icon" onClick={handleLogout}>
-                          <a href="#">
+                          <a href="">
                             <LogoutOutlined />
                           </a>
                           <div className="iconDetail">Logout</div>
                         </li>
                       </>
                     ) : null}
+                    {authenticated ? (
+                      <li className="dropdown">
+                        <a
+                          href="#"
+                          className="dropdown-toggle"
+                          data-toggle="dropdown"
+                        >
+                          <span
+                            className="lnr lnr-cart"
+                            onMouseOver={() => addToTheCart()}
+                          ></span>
+                          <span className="badge badge-bg-1">
+                            {product.length}
+                          </span>
+                        </a>
+                        {/* {console.log(cartData, " teststsets")} */}
 
-                    <li className="dropdown">
-                      <a
-                        href="#"
-                        className="dropdown-toggle"
-                        data-toggle="dropdown"
-                      >
-                        <span
-                          className="lnr lnr-cart"
-                          onMouseOver={() => addToTheCart()}
-                        ></span>
-                        <span className="badge badge-bg-1">
-                          {product.length}
-                        </span>
-                      </a>
-                      {/* {console.log(cartData, " teststsets")} */}
-
-                      {authenticated ? (
                         <>
                           <ul
                             className="dropdown-menu cart-list s-cate"
@@ -204,8 +191,8 @@ export default function Header() {
                             </li>
                           </ul>
                         </>
-                      ) : null}
-                    </li>
+                      </li>
+                    ) : null}
                   </ul>
                 </div>
                 <div className="navbar-header">
@@ -217,7 +204,7 @@ export default function Header() {
                   >
                     <i className="fa fa-bars"></i>
                   </button>
-                  <a className="navbar-brand" href="#home">
+                  <a className="navbar-brand" href="" onClick={handleLogo}>
                     <img
                       src="https://cdn-icons-png.flaticon.com/512/34/34611.png"
                       alt=""
@@ -243,10 +230,10 @@ export default function Header() {
                         </li>
                         <li className="scroll">
                           <a
-                            href="#new-arrivals"
-                            onClick={() => navigate("/home")}
+                            href=""
+                            onClick={() => navigate("/collection")}
                           >
-                            new arrival
+                            collections
                           </a>
                         </li>
                         <li className="scroll">
@@ -254,19 +241,39 @@ export default function Header() {
                             features
                           </a>
                         </li>
+                        <li className="scroll">
+                          <a href="#blog" onClick={() => navigate("/home")}>
+                            blog
+                          </a>
+                        </li>
+                        <li className="scroll">
+                          <a
+                            href="#newsletter"
+                            onClick={() => navigate("/home")}
+                          >
+                            contact
+                          </a>
+                        </li>
                       </>
                     ) : null}
 
-                    <li className="scroll">
-                      <a href="#blog" onClick={() => navigate("/home")}>
-                        blog
-                      </a>
-                    </li>
-                    <li className="scroll">
-                      <a href="#newsletter" onClick={() => navigate("/home")}>
-                        contact
-                      </a>
-                    </li>
+                    {!authenticated ? (
+                      <>
+                        <li className="scroll">
+                          <a href="#blog" onClick={() => navigate("/contact")}>
+                            blog
+                          </a>
+                        </li>
+                        <li className="scroll">
+                          <a
+                            href="#newsletter"
+                            onClick={() => navigate("/contact")}
+                          >
+                            contact
+                          </a>
+                        </li>
+                      </>
+                    ) : null}
                   </ul>
                 </div>
               </div>
