@@ -33,12 +33,7 @@ export default function Signup() {
     dispatch(actions.signupReq(value));
     setLoader(true);
   };
-
-  useEffect(() => {
-    printSuccessMessage(successMessage);
-    printErrorMessage(errorMessage);
-  }, [successMessage, errorMessage]);
-
+  
   const printSuccessMessage = (msg: any) => {
     if (msg) {
       setLoader(false);
@@ -51,6 +46,11 @@ export default function Signup() {
       message.error(msg);
     }
   };
+  
+    useEffect(() => {
+      printSuccessMessage(successMessage);
+      printErrorMessage(errorMessage);
+    }, [successMessage, errorMessage]);
 
   return (
     <>

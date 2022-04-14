@@ -25,7 +25,14 @@ export const apiUrl = {
   SIGNUP: "/user/register",
   LOGIN: "/user/login",
 
-  ALL_PRODUCTS:"/products/filterproduct"
+  ALL_PRODUCTS:"/products/filterproduct",
+  SINGLE_PRODUCT:"/products/getProductById",
+
+  FORGOT_PASS:"user/Forgetpassword",
+  RESET_PASS:"user/Forgetpasswordaftergetmail",
+
+  ADD_TO_CART:"/cart",
+  SHOW_CART:"/cart/getcart"
 };
 
 //Handle Auth request

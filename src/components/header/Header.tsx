@@ -1,7 +1,7 @@
 import "./header.scss";
 import { LogoutOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect} from "react";
 import actions from "../../redux/product/action";
 import { useNavigate } from "react-router-dom";
 import { CountContext } from "../../context/CountContext";
@@ -19,15 +19,15 @@ export default function Header() {
     setProduct(updatedCart());
     total();
   };
-  const itemAdded = (id: number) => {
-    dispatch(actions.addToCart(id));
-    addToTheCart();
-  };
+  // const itemAdded = (id: number) => {
+  //   dispatch(actions.addToCart(id));
+  //   addToTheCart();
+  // };
 
-  const handleRemove = (data: number) => {
-    dispatch(actions.removeFromCart(data));
-    addToTheCart();
-  };
+  // const handleRemove = (data: number) => {
+  //   dispatch(actions.removeFromCart(data));
+  //   addToTheCart();
+  // };
 
   const updatedCart = () => {
     const newCart = cartData.filter((e: any) => e.qty > 0);
@@ -152,7 +152,7 @@ export default function Header() {
                                     >
                                       <span
                                         className="lnr "
-                                        onClick={() => itemAdded(data.id)}
+                                        // onClick={() => itemAdded(data.id)}
                                         style={{
                                           fontSize: "24px",
                                           color: "grey",
@@ -167,7 +167,7 @@ export default function Header() {
                                     >
                                       <span
                                         className="lnr"
-                                        onClick={() => handleRemove(data.id)}
+                                        // onClick={() => handleRemove(data.id)}
                                         style={{
                                           fontSize: "40px",
                                           color: "lightGrey",

@@ -2,7 +2,8 @@ import actions from "./action";
 
 const initialValue = {
   productData: [],
-  totalItem:""
+  totalItem:"",
+  singleProd:[]
 
 };
 
@@ -17,24 +18,10 @@ const productReducers = (state = initialValue, action: any) => {
     //   console.log(action.response, "get Fail");
     //   return {getProductError: action.response };
 
-    case actions.ADD_TO_CART:
-      const add = state.productData.findIndex(
-        (e: any) => e.id === action.payload
-      );
-      // console.log(state.productData[1].qty ,"from reducer");
-      state.productData[add].qty += 1;
-      return {
-        ...state,
-      };
-
-    case actions.REMOVE_FROM_CART:
-      const remove = state.productData.findIndex(
-        (e: any) => e.id === action.payload
-      );
-      state.productData[remove].qty -= 1;
-      return {
-        ...state,
-      };
+    case actions.FETCH_SINGLE_PRODUCT_SUCCESS:
+      return{
+          ...state , singleProd: action.payload
+      }
 
     default:
       return state;

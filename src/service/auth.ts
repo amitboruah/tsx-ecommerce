@@ -26,13 +26,61 @@ export const signup = (payload:any) => {
   });
 };
 
+export const forgotPassword = (payload:any) => {  
+  return ServiceInstance({
+    method: "POST",
+    url: apiUrl.FORGOT_PASS,
+    data: {
+      ...payload,
+    },
+  });
+};
+
+export const resetPassword = (payload:any) => {  
+  return ServiceInstance({
+    method: "PATCH",
+    url: apiUrl.RESET_PASS,
+    data: {
+      ...payload,
+    },
+  });
+};
 
 export const allproducts = (payload:any) => {
-  console.log("from auth");
-  
   return ServiceInstance({
     method: "POST",
     url: apiUrl.ALL_PRODUCTS,
+    data: {
+      ...payload,
+    },
+  });
+};
+
+
+export const singleProduct = (payload:any) => {
+  return ServiceInstance({
+    method: "POST",
+    url: apiUrl.SINGLE_PRODUCT,
+    data: {
+      ...payload,
+    },
+  });
+};
+
+export const addToCart = (payload:any) => {
+  return ServiceInstance({
+    method: "POST",
+    url: apiUrl.ADD_TO_CART,
+    data: {
+      ...payload,
+    },
+  });
+};
+
+export const showCart = (payload:any) => {
+  return ServiceInstance({
+    method: "POST",
+    url: apiUrl.SHOW_CART,
     data: {
       ...payload,
     },

@@ -1,11 +1,15 @@
 import actions from "./action";
 
 const initialState = {
-  idToken: localStorage.getItem("id_token"),
+  // idToken: localStorage.getItem("id_token"),
   signup: "",
   signupError: "",
   userSignupSuccess: "",
-  loginError:""
+  loginError: "",
+  forgotSuccess: "",
+  forgotError: "",
+  resetSuccess: "",
+  resetError: "",
 };
 
 export default function authReducer(state = initialState, action: any) {
@@ -42,7 +46,41 @@ export default function authReducer(state = initialState, action: any) {
     case actions.SIGNUP_FAILED:
       return {
         ...state,
-        signupError: action.error,
+        signupError: action.signupError,
+      };
+
+    case actions.FORGOT_PASSWORD:
+      return {
+        ...initialState,
+      };
+
+    case actions.FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        forgotSuccess: action.forgotSuccess,
+      };
+
+    case actions.FORGOT_PASSWORD_FAIL:
+      return {
+        ...state,
+        forgotError: action.forgotError,
+      };
+
+    case actions.FORGOT_PASSWORD:
+      return {
+        ...initialState,
+      };
+
+    case actions.RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        resetSuccess: action.resetSuccess,
+      };
+
+    case actions.RESET_PASSWORD_FAIL:
+      return {
+        ...state,
+        resetError: action.resetError,
       };
 
     default:

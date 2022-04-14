@@ -1,26 +1,34 @@
-import { Form, Button, Input, message } from "antd";
-import "./signin.scss";
-import { useNavigate } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import actions from "../../redux/auth/action";
-import { authenticated, error } from "../../utility";
-import { useEffect, useState } from "react";
+import { error } from "../../utility";
+import "./forgotPassword.scss";
 
-export default function Signin() {
+export default function ForgotPassword() {
+  const dispatch = useDispatch();
   const [loader, setLoader] = useState(false);
 
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
+  const successMessage = useSelector(
+    (state: any): any => state.authReducer.forgotSuccess
+  );
 
   const errorMessage = useSelector(
-    (state: any): any => state.authReducer.loginError
+    (state: any): any => state.authReducer.forgotError
   );
 
   const handleOnFinish = (value: any): any => {
-    dispatch(actions.loginReq(value));
-    setLoader(true);
+    dispatch(actions.forgotPassword(value));
+    setLoader(true)
   };
+
+  const printSuccessMessage = (msg: any) => {
+    if (msg) {
+      setLoader(false);
+      message.success(msg);
+    }
+  };
+  
   const printErrorMessage = (msg: any) => {
     if (msg) {
       setLoader(false);
@@ -29,10 +37,9 @@ export default function Signin() {
   };
 
   useEffect(() => {
+    printSuccessMessage(successMessage);
     printErrorMessage(errorMessage);
-  }, [errorMessage]);
-
-  // console.log(authenticated, " from login ");
+  }, [successMessage, errorMessage]);
 
   return (
     <>
@@ -44,14 +51,15 @@ export default function Signin() {
             className="loader"
           />
         ) : null}
+
         <div className="form-header">
           <Form
-            // autoComplete="off"
+            autoComplete="off"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 14 }}
             onFinish={handleOnFinish}
           >
-            <h2>Login</h2>
+            <h2>Forgot Password</h2>
 
             <Form.Item
               name="Email"
@@ -68,19 +76,6 @@ export default function Signin() {
               <Input placeholder="Type your Email" />
             </Form.Item>
 
-            <Form.Item
-              name="Password"
-              label="Password"
-              rules={[
-                {
-                  required: true,
-                  message: error.password,
-                },
-              ]}
-            >
-              <Input.Password placeholder="Type your Password" />
-            </Form.Item>
-
             <Form.Item wrapperCol={{ span: 24 }}>
               <Button
                 className="button"
@@ -88,23 +83,9 @@ export default function Signin() {
                 htmlType="submit"
                 style={{ width: "100%" }}
               >
-                Login
+                Submit
               </Button>
             </Form.Item>
-
-            <a href="">
-              <p className="already" onClick={() => navigate("/Signup")}>
-                create account
-              </p>
-            </a>
-            <a href="#">
-              <p
-                className="already"
-                onClick={() => navigate("/forgotPassword")}
-              >
-                Forgot password
-              </p>
-            </a>
           </Form>
         </div>
       </div>

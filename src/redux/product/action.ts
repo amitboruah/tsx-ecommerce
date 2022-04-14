@@ -3,23 +3,20 @@ const actions = {
   GET_DATA_SUCCESS:"GET_DATA_SUCCESS",
   GET_DATA_FAIL:"GET_DATA_FAIL", 
 
-  ADD_TO_CART: "ADD_TO_CART",
-  REMOVE_FROM_CART: "REMOVE_FROM_CART",
+  FETCH_SINGLE_PRODUCT:"FETCH_SINGLE_PRODUCT",
+  FETCH_SINGLE_PRODUCT_SUCCESS:"FETCH_SINGLE_PRODUCT_SUCCESS",
+
 
   fetchData: (payload:any) => ({
     type: actions.FETCH_DATA,
     payload: payload,
   }),
 
-  addToCart: (payload: number) => ({
-    type: actions.ADD_TO_CART,
-    payload: payload,
-  }),
 
-  removeFromCart: (payload: number) => ({
-    type: actions.REMOVE_FROM_CART,
-    payload: payload,
-  }),
+  fetchSingleProduct:(payload:any)=>({
+    type:actions.FETCH_SINGLE_PRODUCT,
+    payload:payload
+  })
 };
 
 export default actions
